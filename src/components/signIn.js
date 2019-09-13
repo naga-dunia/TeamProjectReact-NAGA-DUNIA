@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { NavLink } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -56,16 +57,18 @@ export default function SignIn(props) {
   const classes = useStyles();
 
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(props);
     if (value.email === "" || value.password === "") {
       alert('fill the right email and password')
-    } else {
-      props.history.push("/jsonholder");
-      localStorage.setItem("isLoggedIn", true)
-      console.log(value);
-      console.log(setValue);
+    } 
+    else if(JSON.parse(localStorage.getItem("userInfo")).email === value.email && JSON.parse(localStorage.getItem("userInfo")).password === value.password){
+      props.history.push("/jsonholder")
+    }else{
+      alert('Your email or password wrong!')
+    } 
+    
     }
-  }
+  
   
   function handleChange(event) {
     setValue({
@@ -129,9 +132,9 @@ export default function SignIn(props) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <NavLink to="/signup">
+                Dont have any account?SignUp
+              </NavLink>
             </Grid>
           </Grid>
         </form>
