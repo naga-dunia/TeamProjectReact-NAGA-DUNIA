@@ -17,7 +17,7 @@ class JsonPlaceHolder extends React.Component{
     componentDidMount() {
             axios.get(API_STRING).then(res => {
             const persons = res.data.filter(function(number) {
-                return number.id == '163537';
+                return number.id === '163537';
               });
             this.setState({ persons })
         })

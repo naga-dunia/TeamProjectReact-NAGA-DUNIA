@@ -35,11 +35,11 @@ export default function Orders() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
+            <TableCell>Employee id</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Age</TableCell>
+            <TableCell>Salary</TableCell>
+            <TableCell align="right">Extra Money</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
