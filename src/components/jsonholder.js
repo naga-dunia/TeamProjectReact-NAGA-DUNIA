@@ -1,52 +1,57 @@
 import React from 'react'
 import axios from 'axios'
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import FormControl from '@material-ui/core/FormControl';
+// import Select from '@material-ui/core/Select';
 
 const API_STRING = `http://dummy.restapiexample.com/api/v1/employees`
 
 class JsonPlaceHolder extends React.Component{
-    state = {
-        persons: [],
-        filter:'163537'
-      }
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      persons: [],
+      filter:''
+    }
+  }
     
-    componentDidMount() {
+    componentDidMount() {   
             axios.get(API_STRING).then(res => {
-            const persons = res.data.filter(function(number) {
-                return number.id == '163537';
-              });
+              // const persons = (this.state.filter === ''?res.data:res.data.filter(number=> {return number.id === this.state.filter;}));
+            // const persons = res.data.filter(number=> {return number.id === this.state.filter;});
+            const persons = res.data.slice(0,5);
             this.setState({ persons })
         })
       }
 
-        handleChange(event) {
-            this.setState({
-                filter: event.target.value
-            });
-            console.log(event.target.value)
-        }
+      handleChange = event => {
+        this.setState({
+          [event.target.name]: event.target.value
+        })
+        console.log(event.target.value)
+      }
     
       render() {
         return (
         <Grid container spacing={0}>
             
-            <Grid item xs={12}>
-                <FormControl>
+            {/* <Grid item xs={12}>
+                <FormControl style={{width:"100%"}}>
                     <InputLabel htmlFor="age-simple">Age</InputLabel>
                     <Select
+                    name="filter"
                     value={this.state.filter}
                     onChange={this.handleChange}
                     >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={163907}>163907</MenuItem>
+                    <MenuItem value={164232}>164232</MenuItem>
                     <MenuItem value={30}>Thirty</MenuItem>
                     </Select>
                 </FormControl>
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={2} style={{textAlign:"left"}}>
                 <h3>Employee Id</h3>
