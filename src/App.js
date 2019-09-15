@@ -10,8 +10,8 @@ function App() {
     <Router>
    
     <Route path='/' exact component={SignIn} />
-    <Route path='/signup' exact component={SignUp} />
-    <Route path='/Dashboard' exact component={Dashboard} />
+    <Route path='/signup' component={SignUp} />
+    <Route path='/Dashboard' component={Dashboard} />
     </Router>
   )
 // import SignIn from "./components/signIn"
