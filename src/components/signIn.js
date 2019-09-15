@@ -62,7 +62,7 @@ export default function SignIn(props) {
       alert('fill the right email and password')
     } 
     else if(JSON.parse(localStorage.getItem("userInfo")).email === value.email && JSON.parse(localStorage.getItem("userInfo")).password === value.password){
-      props.history.push("/jsonholder")
+      props.history.push("/Dashboard")
     }else{
       alert('Your email or password wrong!')
     } 
