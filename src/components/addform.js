@@ -48,7 +48,7 @@ class PersonListPost extends React.Component {
         <input type='text' name='name' value={this.state.name} onChange={this.handleChange} /><br />
         <label>Salary:</label>
         <input type='text' name='salary' value={this.state.salary} onChange={this.handleChange} /><br />
-        <button type='submit'>Add Person</button>
+        <button type='submit'>Add Data</button>
       </form>
       </div>
     )
