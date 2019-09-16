@@ -10,6 +10,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import AddModal from './addform';
 
 const API_STRING = `http://dummy.restapiexample.com/api/v1/employees`
 
@@ -31,6 +32,10 @@ class JsonPlaceHolder extends React.Component{
             this.setState({ persons })
         })
       }
+
+  refreshPaging = () => {
+    this.componentDidMount();
+  }
 
       handleChange = event => {
         this.setState({
@@ -58,6 +63,7 @@ class JsonPlaceHolder extends React.Component{
               </TableRow>
               )}
             </TableBody>
+          <AddModal refreshPage = {this.refreshPaging}/>
           </Table>
         )
       }
