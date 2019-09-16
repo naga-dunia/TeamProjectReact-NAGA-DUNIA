@@ -14,7 +14,6 @@ export const mainListItems = (
     </ListItem>
   </div>
 );
-
 export const secondaryListItems = (
   <div>
   </div>
