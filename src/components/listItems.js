@@ -4,13 +4,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PeopleIcon from '@material-ui/icons/People';
 
+const logut = () => {
+  signout(() => props.history.push("/"));
+};
+
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Sign Out" />
+      <ListItemText onClick={logut} primary="Sign Out" />
     </ListItem>
   </div>
 );

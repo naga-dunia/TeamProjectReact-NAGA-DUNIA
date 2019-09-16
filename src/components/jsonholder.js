@@ -77,7 +77,7 @@ class JsonPlaceHolder extends React.Component{
                 <TableCell>Employee id</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Salary</TableCell>
-                <TableCell>Tool</TableCell>
+                {/* <TableCell>Tool</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -86,12 +86,12 @@ class JsonPlaceHolder extends React.Component{
                 <TableCell>{person.id}</TableCell>
                 <TableCell>{person.employee_name}</TableCell>
                 <TableCell>{person.employee_salary}</TableCell>
-                <TableCell>
+                {/* <TableCell>
                 <form onSubmit={this.handleEraseSubmit}>
                   <input type='hidden' name='id' value={person.id} />
                   <button type='submit'>Delete Person</button>
                 </form>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
               )}
             </TableBody>
