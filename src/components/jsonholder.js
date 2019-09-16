@@ -11,6 +11,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import AddModal from './addform';
+import UpdateModal from './updateForm';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const API_STRING = `http://dummy.restapiexample.com/api/v1/employees`
 
@@ -21,7 +23,6 @@ class JsonPlaceHolder extends React.Component{
     this.state = {
       persons: [],
       filter:'',
-      eraseId:'172185'
     }
   }
     
@@ -33,34 +34,22 @@ class JsonPlaceHolder extends React.Component{
             this.setState({ persons })
         })
       }
-      handleSubmit = event => {
-        event.preventDefault()
-        const API_STRING_ERASE = `http://dummy.restapiexample.com/api/v1/update`
-        axios.delete(`${API_STRING_ERASE}/${this.state.eraseId}`).then(response => {
-          alert("Berhasil Menambahkan data");
-          this.componentDidMount();
+      handleEraseSubmit = id => {
+        axios
+        .delete(`http://dummy.restapiexample.com/api/v1/delete/${id}`).then(() => {
+          this.refreshPaging();
+          alert("Berhasil menghapus data");
         })
-        console.log(this.state.eraseId)
       }
-    
-      // }
-      // handleEraseSubmit = event => {
-      //   event.preventDefault()
-      //   this.setState({
-      //     eraseId: event.target.value
-      //   })
-      //   console.log(this.state.eraseId)
-      //   this.handleEraseProses();
-      // }
-      // handleEraseProses = () => {
-      //   const API_STRING_ERASE = `http://dummy.restapiexample.com/api/v1/update`
-      //   axios.delete(`${API_STRING_ERASE}/${this.state.eraseId}`).then(response => {
-      //     alert("Berhasil menghapus data");
-      //     this.componentDidMount();
-      //   })
-      // }
+      
+
       refreshPaging = () => {
-        this.componentDidMount();
+        axios.get(API_STRING).then(res => {
+          // const persons = (this.state.filter === ''?res.data:res.data.filter(number=> {return number.id === this.state.filter;}));
+          const persons = res.data.filter(number=> {return number.employee_age === '741852963';});
+          // const persons = res.data.slice(0,5);
+          this.setState({ persons })
+        })
       }
 
       handleChange = event => {
@@ -77,7 +66,8 @@ class JsonPlaceHolder extends React.Component{
                 <TableCell>Employee id</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Salary</TableCell>
-                {/* <TableCell>Tool</TableCell> */}
+                <TableCell>Edit</TableCell>
+                <TableCell>Erase</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -86,12 +76,17 @@ class JsonPlaceHolder extends React.Component{
                 <TableCell>{person.id}</TableCell>
                 <TableCell>{person.employee_name}</TableCell>
                 <TableCell>{person.employee_salary}</TableCell>
-                {/* <TableCell>
-                <form onSubmit={this.handleEraseSubmit}>
-                  <input type='hidden' name='id' value={person.id} />
-                  <button type='submit'>Delete Person</button>
-                </form>
-                </TableCell> */}
+                <TableCell>
+                <UpdateModal
+                updateId={person.id}
+                updateName={person.employee_name}
+                updateSalary={person.employee_salary}
+                refreshPage = {this.refreshPaging}
+                />
+                </TableCell>
+                <TableCell>
+                <a key={index} onClick={() => this.handleEraseSubmit(person.id)} style={{cursor:"pointer"}}><DeleteIcon color="primary" fontSize="large"></DeleteIcon></a>
+                </TableCell>
               </TableRow>
               )}
             </TableBody>
