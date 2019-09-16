@@ -14,6 +14,7 @@ import AddModal from './addform';
 import UpdateModal from './updateForm';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+const API_STRING = `http://dummy.restapiexample.com/api/v1/employees`
 
 class JsonPlaceHolder extends React.Component{
   constructor(props) {
@@ -21,12 +22,11 @@ class JsonPlaceHolder extends React.Component{
   
     this.state = {
       persons: [],
-      // filter:'',
+      filter:'',
     }
   }
     
-      componentDidMount() {
-        const API_STRING = `http://dummy.restapiexample.com/api/v1/employees`   
+      componentDidMount() {   
             axios.get(API_STRING).then(res => {
             // const persons = (this.state.filter === ''?res.data:res.data.filter(number=> {return number.id === this.state.filter;}));
             const persons = res.data.filter(number=> {return number.employee_age === '741852963';});
@@ -45,7 +45,9 @@ class JsonPlaceHolder extends React.Component{
 
       refreshPaging = () => {
         axios.get(API_STRING).then(res => {
+          // const persons = (this.state.filter === ''?res.data:res.data.filter(number=> {return number.id === this.state.filter;}));
           const persons = res.data.filter(number=> {return number.employee_age === '741852963';});
+          // const persons = res.data.slice(0,5);
           this.setState({ persons })
         })
       }
@@ -65,7 +67,7 @@ class JsonPlaceHolder extends React.Component{
                 <TableCell>Name</TableCell>
                 <TableCell>Salary</TableCell>
                 <TableCell>Edit</TableCell>
-                <TableCell><img src="" alt=""/></TableCell>
+                <TableCell>Erase</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
